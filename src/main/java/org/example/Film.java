@@ -20,6 +20,15 @@ public class Film implements Oceni {
         return reziser;
     }
 
+    //racunanje ukupne ocene filma
+    public double getUkupno(){
+        double ukupno = 0;
+        for(Recenzija recenzija : this.mapaRecenzija.values()){
+            ukupno += recenzija.getOcena();
+        }
+        return ukupno;
+    }
+
     public void setReziser(String reziser) {
         this.reziser = reziser;
     }

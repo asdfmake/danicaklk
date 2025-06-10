@@ -15,11 +15,7 @@ public class RmdbPlatforma {
         Map<String, Double> reziserOcena = new HashMap<String, Double>();
 
         for(Film film : listaFilmova){
-            //racunanje ukupne ocene filma
-            double ukupno = 0;
-            for(Recenzija recenzija : film.getMapaRecenzija().values()){
-                ukupno += recenzija.getOcena();
-            }
+            double ukupno = film.getUkupno();
             //ovde imamo ukupnu ocenu za neki film
 
             if(reziserOcena.containsKey(film.getReziser())){
