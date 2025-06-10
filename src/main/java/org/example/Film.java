@@ -24,10 +24,15 @@ public class Film implements Oceni {
         this.reziser = reziser;
     }
 
+    public Map<Korisnik, Recenzija> getMapaRecenzija() {
+        return mapaRecenzija;
+    }
+
     public Film(String naziv, String reziser) {
         this.naziv = naziv;
         this.reziser = reziser;
         this.kategorijaFilma = KategorijaFilma.NEOCENJENO;
+        RmdbPlatforma.listaFilmova.add(this);
     }
 
     public boolean ostaviRecenziju(Double ocena, String komentar, Korisnik korisnik){
@@ -49,11 +54,13 @@ public class Film implements Oceni {
 
     public void azurirajKategoriju(){
         double zbir = 0;
-        mapaRecenzija.forEach((key, value)->{
-            if(!key.isAnoniman()){
+        for (Map.Entry<Korisnik, Recenzija> entry : mapaRecenzija.entrySet()) {
+            Korisnik key = entry.getKey();
+            Recenzija value = entry.getValue();
+            if (!key.isAnoniman()) {
                 zbir += value.getOcena();
             }
-        });
+        }
 
         double prosek = zbir/mapaRecenzija.size();
 
@@ -73,6 +80,7 @@ public class Film implements Oceni {
             this.kategorijaFilma=KategorijaFilma.MAJSTORSKO_DELO;
         }
     }
+
 
 
 }

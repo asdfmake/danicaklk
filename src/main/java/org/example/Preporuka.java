@@ -8,6 +8,10 @@ public class Preporuka implements Oceni {
     private Film film;
     private Map<String, Recenzija> mapaRecenzija;
 
+    public Film getFilm() {
+        return film;
+    }
+
     public Preporuka(Korisnik k1, Korisnik k2, Film film) {
         this.k1 = k1;
         this.k2 = k2;

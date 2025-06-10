@@ -28,6 +28,7 @@ public class Korisnik {
     public Korisnik(String korisnickoIme, boolean anoniman) {
         this.korisnickoIme = korisnickoIme;
         this.anoniman = anoniman;
+        RmdbPlatforma.listaKorisnika.add(this);
     }
 
     public List<Preporuka> getListaPreporuka() {
