@@ -14,19 +14,20 @@ public class RmdbPlatforma {
     public String najboljiReziser(){
         Map<String, Double> reziserOcena = new HashMap<String, Double>();
 
-        for(Film f : listaFilmova){
+        for(Film film : listaFilmova){
+            //racunanje ukupne ocene filma
             double ukupno = 0;
-            for(Recenzija r : f.getMapaRecenzija().values()){
-                ukupno += r.getOcena();
+            for(Recenzija recenzija : film.getMapaRecenzija().values()){
+                ukupno += recenzija.getOcena();
             }
             //ovde imamo ukupnu ocenu za neki film
 
-            if(reziserOcena.containsKey(f.getReziser())){
-                ukupno += reziserOcena.get(f.getReziser());
-                reziserOcena.put(f.getReziser(), ukupno);
+            if(reziserOcena.containsKey(film.getReziser())){
+                ukupno += reziserOcena.get(film.getReziser());
+                reziserOcena.put(film.getReziser(), ukupno);
             }
             else{
-                reziserOcena.put(f.getReziser(), ukupno);
+                reziserOcena.put(film.getReziser(), ukupno);
             }
             //iznad smo ubacili u mapu ime rezisera kao kljuc, a kao value je njegov ukupan score iz svih recenzija svakog filma
         }
@@ -36,10 +37,10 @@ public class RmdbPlatforma {
         lista.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
         // Return the director with the highest score (first in sorted list)
-        if (!lista.isEmpty()) {
-            return lista.get(0).getKey();
+        if (lista.isEmpty()) {
+            return null; // or "Nema podataka"
         } else {
-            return null; // or "Nema podataka", depending on your design
+            return lista.get(0).getKey();
         }
 
     }
@@ -47,8 +48,8 @@ public class RmdbPlatforma {
     public List<Film> vratiPreporucene(Korisnik korisnik){
         List<Film> preporuceni = new ArrayList<>();
 
-        for(Preporuka p : korisnik.getListaPreporuka()){
-            preporuceni.add(p.getFilm());
+        for(Preporuka preporuka : korisnik.getListaPreporuka()){
+            preporuceni.add(preporuka.getFilm());
         }
 
         return preporuceni;
